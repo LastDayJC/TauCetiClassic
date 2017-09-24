@@ -2,6 +2,7 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1.0
 
+	var/basetype = /turf/space
 	//for floors, use is_plating(), is_plasteel_floor() and is_light_floor()
 	var/intact = 1
 
@@ -170,6 +171,8 @@
 	var/old_lighting_overlay = lighting_overlay // Not even a need to cast this, honestly.
 	var/list/old_lighting_corners = corners
 
+	var/old_basetype = basetype
+
 	//world << "Replacing [src.type] with [N]"
 
 	if(connections) connections.erase_all()
@@ -211,6 +214,7 @@
 		W.levelupdate()
 		. =  W
 
+	basetype = old_basetype
 	lighting_overlay = old_lighting_overlay
 	affecting_lights = old_affecting_lights
 	corners = old_lighting_corners
@@ -232,7 +236,15 @@
 		else
 			lighting_clear_overlay()
 
+/turf/proc/MoveTurf(turf/target, move_unmovable = 0)
+	if(type != basetype || move_unmovable)
+		. = target.ChangeTurf(src.type)
+		ChangeTurf(basetype)
+	else
+		return target
 
+/turf/proc/BreakToBase()
+	ChangeTurf(basetype)
 //Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
 //  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.
 //  As such, this will no longer be used.
@@ -286,7 +298,7 @@
 
 
 /turf/proc/ReplaceWithLattice()
-	src.ChangeTurf(/turf/space)
+	src.ChangeTurf(basetype)
 	spawn()
 		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 

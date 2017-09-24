@@ -13,6 +13,7 @@
 						/obj/structure/scrap/guns/large,\
 						/obj/structure/scrap/cloth/large,\
 						/obj/structure/scrap/syndie/large,\
+						/obj/structure/scrap/poor/structure,\
 						/obj/structure/scrap/science/large\
 					)
 

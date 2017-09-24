@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffddf0"
+	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	access = list(
@@ -50,7 +50,7 @@
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_morgue, access_surgery, access_maint_tunnels)
 	alt_titles = list("Surgeon","Emergency Physician","Nurse")
 	minimal_player_ingame_minutes = 960
@@ -118,7 +118,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_chemistry)
 	alt_titles = list("Pharmacist")
 	minimal_player_ingame_minutes = 960
@@ -152,7 +152,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer and research director"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_morgue, access_genetics, access_research)
 	minimal_player_ingame_minutes = 960
 
@@ -186,7 +186,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_virology)
 	alt_titles = list("Pathologist","Microbiologist")
 	minimal_player_ingame_minutes = 960
@@ -224,7 +224,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief medical officer"
-	selection_color = "#ffeef0"
+	selection_color = "#013d3b"
 	access = list(access_medical, access_psychiatrist)
 	alt_titles = list("Psychologist")
 	minimal_player_ingame_minutes = 960

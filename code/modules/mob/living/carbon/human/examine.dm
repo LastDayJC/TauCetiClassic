@@ -7,7 +7,6 @@
 	var/skipears = 0
 	var/skipeyes = 0
 	var/skipface = 0
-
 	//exosuits and helmets obscure our view and stuff.
 	if(wear_suit)
 		skipgloves = wear_suit.flags_inv & HIDEGLOVES
@@ -25,229 +24,234 @@
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	// crappy hacks because you can't do \his[src] etc. I'm sorry this proc is so unreadable, blame the text macros :<
-	var/t_He = "It" //capitalised for use at the start of each line.
-	var/t_his = "its"
-	var/t_him = "it"
-	var/t_has = "has"
-	var/t_is = "is"
+	var/t_He = "Это" //capitalised for use at the start of each line.
+	var/t_his = "его"
+	var/t_his2 = "Его"
+	var/t_is = "это"
+	var/t_its = "него"
+	var/buckle_event = "пристёгнут"
+	var/t_sleeping = "заснул"
+	var/t_catatonics = "впал"
 
-	var/msg = "<span class='info'>*---------*\nThis is "
+	var/msg = "<span class='info'>*---------*\nЭто "
 
 	if( skipjumpsuit && skipface ) //big suits/masks/helmets make it hard to tell their gender
-		t_He = "They"
-		t_his = "their"
-		t_him = "them"
-		t_has = "have"
-		t_is = "are"
+		t_He = "Оно"
+		t_his = "их"
+		t_is = "наход&#255;тс&#255;"
 	else
 		switch(gender)
 			if(MALE)
-				t_He = "He"
-				t_his = "his"
-				t_him = "him"
+				t_He = "Он"
+				t_his = "его"
+				t_his2 = "Его"
+				t_its = "него"
 			if(FEMALE)
-				t_He = "She"
-				t_his = "her"
-				t_him = "her"
+				t_He = "Она"
+				t_his = "её"
+				t_his2 = "Её"
+				t_its = "неё"
+				buckle_event = "пристёгнута"
+				t_sleeping = "заснула"
+				t_catatonics = "впала"
 
 	msg += "<EM>[src.name]</EM>!\n"
 
-	//uniform
+	//uniform TRANSLATE
 	if(w_uniform && !skipjumpsuit)
 		//Ties
 		var/tie_msg
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
 			if(U.hastie)
-				tie_msg += " with [bicon(U.hastie)] \a [U.hastie]"
+				tie_msg += " с [bicon(U.hastie)] \a [U.hastie]"
 
 		if(w_uniform.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] wearing [bicon(w_uniform)] [w_uniform.gender==PLURAL?"some":"a"] [(w_uniform.blood_color != "#030303") ? "blood" : "oil"]-stained [w_uniform.name][tie_msg]!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(w_uniform)] [w_uniform.gender==PLURAL?"":""] испачканую [(w_uniform.blood_color != "#030303") ? "кровью" : "топливом"] [w_uniform.name][tie_msg]!</span>\n"
 		else if(w_uniform.wet)
-			msg += "<span class='wet'>[t_He] [t_is] wearing [bicon(w_uniform)] [w_uniform.gender==PLURAL?"some":"a"] wet [w_uniform.name][tie_msg]!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшую [bicon(w_uniform)] [w_uniform.gender==PLURAL?"":""] [w_uniform.name][tie_msg]!</span>\n"
 		else
-			msg += "[t_He] [t_is] wearing [bicon(w_uniform)] \a [w_uniform][tie_msg].\n"
+			msg += "[t_He] носит [bicon(w_uniform)] [w_uniform][tie_msg].\n"
 
-	//head
+	//head TRANSLATE
 	if(head)
 		if(head.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] wearing [bicon(head)] [head.gender==PLURAL?"some":"a"] [(head.blood_color != "#030303") ? "blood" : "oil"]-stained [head.name] on [t_his] head!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(head)] [head.gender==PLURAL?"":""] испачканое [(head.blood_color != "#030303") ? "кровью" : "топливом"] [head.name] на [t_his] голове!</span>\n"
 		else if(head.wet)
-			msg += "<span class='wet'>[t_He] [t_is] wearing [bicon(head)] [head.gender==PLURAL?"some":"a"] wet [head.name] on [t_his] head!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшую [bicon(head)] [head.gender==PLURAL?"":""] [head.name] на голове!</span>\n"
 		else
-			msg += "[t_He] [t_is] wearing [bicon(head)] \a [head] on [t_his] head.\n"
+			msg += "[t_He] носит [bicon(head)] [head] на голове.\n"
 
-	//suit/armour
+	//suit/armour TRANSLATE
 	if(wear_suit)
-		if(wear_suit.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] wearing [bicon(wear_suit)] [wear_suit.gender==PLURAL?"some":"a"] [(wear_suit.blood_color != "#030303") ? "blood" : "oil"]-stained [wear_suit.name]!</span>\n"
+		if(wear_suit.blood_DNA) //TRANSLATE TO RUSSTIAN LANGUAGE
+			msg += "<span class='warning'>[t_He] носит [bicon(wear_suit)] [wear_suit.gender==PLURAL?"":""] испачканое [(wear_suit.blood_color != "#030303") ? "кровью" : "топливом"] [wear_suit.name]!</span>\n"
 		else if(wear_suit.wet)
-			msg += "<span class='wet'>[t_He] [t_is] wearing [bicon(wear_suit)] [wear_suit.gender==PLURAL?"some":"a"] wet [wear_suit.name]!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшую [bicon(wear_suit)] [wear_suit.gender==PLURAL?"":""] [wear_suit.name]!</span>\n"
 		else
-			msg += "[t_He] [t_is] wearing [bicon(wear_suit)] \a [wear_suit].\n"
+			msg += "[t_He] носит [bicon(wear_suit)] [wear_suit].\n"
 
-		//suit/armour storage
+		//suit/armour storage TRANSLATE
 		if(s_store && !skipsuitstorage)
 			if(s_store.blood_DNA)
-				msg += "<span class='warning'>[t_He] [t_is] carrying [bicon(s_store)] [s_store.gender==PLURAL?"some":"a"] [(s_store.blood_color != "#030303") ? "blood" : "oil"]-stained [s_store.name] on [t_his] [wear_suit.name]!</span>\n"
+				msg += "<span class='warning'>[t_He] носит [bicon(s_store)] [s_store.gender==PLURAL?"":""] испачканую [(s_store.blood_color != "#030303") ? "кровью" : "топливом"] [s_store.name] на [wear_suit.name]!</span>\n"
 			else
-				msg += "[t_He] [t_is] carrying [bicon(s_store)] \a [s_store] on [t_his] [wear_suit.name].\n"
+				msg += "[t_He] несёт [bicon(s_store)] [s_store] на [wear_suit.name].\n"
 
-	//back
+	//back TRANSLATE
 	if(back)
 		if(back.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_has] [bicon(back)] [back.gender==PLURAL?"some":"a"] [(back.blood_color != "#030303") ? "blood" : "oil"]-stained [back] on [t_his] back.</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(back)] [back.gender==PLURAL?"":""] испачканый [(back.blood_color != "#030303") ? "кровью" : "топливом"] [back] на спине.</span>\n"
 		else if(back.wet)
-			msg += "<span class='wet'>[t_He] [t_has] [bicon(back)] [back.gender==PLURAL?"some":"a"] wet [back] on [t_his] back.</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокший [bicon(back)] [back.gender==PLURAL?"":""][back] на спине.</span>\n"
 		else
-			msg += "[t_He] [t_has] [bicon(back)] \a [back] on [t_his] back.\n"
+			msg += "[t_He] носит [bicon(back)] [back] на спине.\n"
 
-	//left hand
+	//left hand TRANSLATE
 	if(l_hand && !(l_hand.flags&ABSTRACT))
 		if(l_hand.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] holding [bicon(l_hand)] [l_hand.gender==PLURAL?"some":"a"] [(l_hand.blood_color != "#030303") ? "blood" : "oil"]-stained [l_hand.name] in [t_his] left hand!</span>\n"
+			msg += "<span class='warning'>[t_He] держит [bicon(l_hand)] [l_hand.gender==PLURAL?"":""] испачканый [(l_hand.blood_color != "#030303") ? "кровью" : "топливом"] [l_hand.name] в левой руке!</span>\n"
 		else if(l_hand.wet)
-			msg += "<span class='wet'>[t_He] [t_is] holding [bicon(l_hand)] [l_hand.gender==PLURAL?"some":"a"] wet [l_hand.name] in [t_his] left hand!</span>\n"
+			msg += "<span class='wet'>[t_He] держит промокшую [bicon(l_hand)] [l_hand.gender==PLURAL?"":""] [l_hand.name] в левой руке!</span>\n"
 		else
-			msg += "[t_He] [t_is] holding [bicon(l_hand)] \a [l_hand] in [t_his] left hand.\n"
+			msg += "[t_He] держит [bicon(l_hand)] [l_hand] в левой руке.\n"
 
-	//right hand
+	//right hand TRANSLATE
 	if(r_hand && !(r_hand.flags&ABSTRACT))
 		if(r_hand.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] holding [bicon(r_hand)] [r_hand.gender==PLURAL?"some":"a"] [(r_hand.blood_color != "#030303") ? "blood" : "oil"]-stained [r_hand.name] in [t_his] right hand!</span>\n"
+			msg += "<span class='warning'>[t_He] держит [bicon(r_hand)] [r_hand.gender==PLURAL?"":""] испачканый [(r_hand.blood_color != "#030303") ? "кровью" : "топливом"] [r_hand.name] в правой руке!</span>\n"
 		else if(r_hand.wet)
-			msg += "<span class='wet'>[t_He] [t_is] holding [bicon(r_hand)] [r_hand.gender==PLURAL?"some":"a"] wet [r_hand.name] in [t_his] right hand!</span>\n"
+			msg += "<span class='wet'>[t_He] держит промокший(ую) [bicon(r_hand)] [r_hand.gender==PLURAL?"":""] [r_hand.name] в правой руке!</span>\n"
 		else
-			msg += "[t_He] [t_is] holding [bicon(r_hand)] \a [r_hand] in [t_his] right hand.\n"
-
-	//gloves
+			msg += "[t_He] держит [bicon(r_hand)] [r_hand] в правой руке.\n"
+	//gloves TRANSLATE
 	if(gloves && !skipgloves)
 		if(gloves.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_has] [bicon(gloves)] [gloves.gender==PLURAL?"some":"a"] [(gloves.blood_color != "#030303") ? "blood" : "oil"]-stained [gloves.name] on [t_his] hands!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(gloves)] [gloves.gender==PLURAL?"":""] испачканые [(gloves.blood_color != "#030303") ? "кровью" : "топливом"] [gloves.name] на руках!</span>\n"
 		else if(gloves.wet)
-			msg += "<span class='wet'>[t_He] [t_has] [bicon(gloves)] [gloves.gender==PLURAL?"some":"a"] wet [gloves.name] on [t_his] hands!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшие [bicon(gloves)] [gloves.gender==PLURAL?"":""] [gloves.name] на руках!</span>\n"
 		else
-			msg += "[t_He] [t_has] [bicon(gloves)] \a [gloves] on [t_his] hands.\n"
+			msg += "[t_He] носит [bicon(gloves)] [gloves] на руках.\n"
 	else if(blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] [(hand_blood_color != "#030303") ? "blood" : "oil"]-stained hands!</span>\n"
+		msg += "<span class='warning'>У [t_its] испачканые [(hand_blood_color != "#030303") ? "кровью" : "топливом"] руки!</span>\n"
 
-	//handcuffed?
+	//handcuffed? TRANSLATE
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
-			msg += "<span class='warning'>[t_He] [t_is] [bicon(handcuffed)] restrained with cable!</span>\n"
+			msg += "<span class='warning'>[t_He] в [bicon(handcuffed)] самодельных наручниках!</span>\n"
 		else
-			msg += "<span class='warning'>[t_He] [t_is] [bicon(handcuffed)] handcuffed!</span>\n"
+			msg += "<span class='warning'>[t_He] в [bicon(handcuffed)] наручниках!</span>\n"
 
-	//buckled
+	//buckled TRANSLATE
 	if(buckled)
-		msg += "<span class='warning'>[t_He] [t_is] [bicon(buckled)] buckled to [buckled]!</span>\n"
+		msg += "<span class='warning'>[t_He] [buckle_event] к [bicon(buckled)] [buckled]!</span>\n"
 
-	//belt
+	//belt TRANSLATE
 	if(belt)
 		if(belt.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_has] [bicon(belt)] [belt.gender==PLURAL?"some":"a"] [(belt.blood_color != "#030303") ? "blood" : "oil"]-stained [belt.name] about [t_his] waist!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(belt)] [belt.gender==PLURAL?"":""] испачканый [(belt.blood_color != "#030303") ? "кровью" : "топливом"] [belt.name] на талии!</span>\n"
 		else if(belt.wet)
-			msg += "<span class='wet'>[t_He] [t_has] [bicon(belt)] [belt.gender==PLURAL?"some":"a"] wet [belt.name] about [t_his] waist!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокший [bicon(belt)] [belt.gender==PLURAL?"":""] [belt.name] на талии!</span>\n"
 		else
-			msg += "[t_He] [t_has] [bicon(belt)] \a [belt] about [t_his] waist.\n"
+			msg += "[t_He] носит [bicon(belt)] [belt] на талии.\n"
 
-	//shoes
+	//shoes TRANSLATE
 	if(shoes && !skipshoes)
 		if(shoes.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_is] wearing [bicon(shoes)] [shoes.gender==PLURAL?"some":"a"] [(shoes.blood_color != "#030303") ? "blood" : "oil"]-stained [shoes.name] on [t_his] feet!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(shoes)] [shoes.gender==PLURAL?"":""] испачканые [(shoes.blood_color != "#030303") ? "кровью" : "топливом"] [shoes.name] на ногах!</span>\n"
 		else if(shoes.wet)
-			msg += "<span class='wet'>[t_He] [t_is] wearing [bicon(shoes)] [shoes.gender==PLURAL?"some":"a"] wet [shoes.name] on [t_his] feet!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшие [bicon(shoes)] [shoes.gender==PLURAL?"":""] [shoes.name] на ногах!</span>\n"
 		else
-			msg += "[t_He] [t_is] wearing [bicon(shoes)] \a [shoes] on [t_his] feet.\n"
+			msg += "[t_He] носит [bicon(shoes)] [shoes] на ногах.\n"
 	else if(feet_blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] [(feet_blood_color != "#030303") ? "blood" : "oil"]-stained feet!</span>\n"
+		msg += "<span class='warning'>У [t_its] испачканые [(feet_blood_color != "#030303") ? "кровью" : "топливом"] ноги!</span>\n"
 
-	//mask
+	//mask TRANSLATE
 	if(wear_mask && !skipmask)
 		if(wear_mask.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_has] [bicon(wear_mask)] [wear_mask.gender==PLURAL?"some":"a"] [(wear_mask.blood_color != "#030303") ? "blood" : "oil"]-stained [wear_mask.name] on [t_his] face!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(wear_mask)] [wear_mask.gender==PLURAL?"":""] испачканую [(wear_mask.blood_color != "#030303") ? "кровью" : "топливом"] [wear_mask.name] на лице!</span>\n"
 		else if(wear_mask.wet)
-			msg += "<span class='wet'>[t_He] [t_has] [bicon(wear_mask)] [wear_mask.gender==PLURAL?"some":"a"] wet [wear_mask.name] on [t_his] face!</span>\n"
+			msg += "<span class='wet'>[t_He] носит промокшие [bicon(wear_mask)] [wear_mask.gender==PLURAL?"":""] [wear_mask.name] на лице!</span>\n"
 		else
-			msg += "[t_He] [t_has] [bicon(wear_mask)] \a [wear_mask] on [t_his] face.\n"
+			msg += "[t_He] носит [bicon(wear_mask)] [wear_mask] на лице.\n"
 
-	//eyes
+	//eyes TRANSLATE
 	if(glasses && !skipeyes)
 		if(glasses.blood_DNA)
-			msg += "<span class='warning'>[t_He] [t_has] [bicon(glasses)] [glasses.gender==PLURAL?"some":"a"] [(glasses.blood_color != "#030303") ? "blood" : "oil"]-stained [glasses] covering [t_his] eyes!</span>\n"
+			msg += "<span class='warning'>[t_He] носит [bicon(glasses)] [glasses.gender==PLURAL?"":""] испачканые [(glasses.blood_color != "#030303") ? "кровью" : "топливом"] [glasses] на глазах!</span>\n"
 		else if(glasses.wet)
-			msg += "<span class='wet'>[t_He] [t_has] [bicon(glasses)] [glasses.gender==PLURAL?"some":"a"] wet [glasses] covering [t_his] eyes!</span>\n"
+			msg += "<span class='wet'>[t_He] носит мокрые [bicon(glasses)] [glasses.gender==PLURAL?"":""] [glasses] на глазах!</span>\n"
 		else
-			msg += "[t_He] [t_has] [bicon(glasses)] \a [glasses] covering [t_his] eyes.\n"
+			msg += "[t_He] носит [bicon(glasses)] [glasses] на глазах\n"
 
-	//left ear
+	//left ear TRANSLATE
 	if(l_ear && !skipears)
-		msg += "[t_He] [t_has] [bicon(l_ear)] \a [l_ear] on [t_his] left ear.\n"
+		msg += "[t_He] носит [bicon(l_ear)] [l_ear] на левом ухе.\n"
 
-	//right ear
+	//right ear TRANSLATE
 	if(r_ear && !skipears)
-		msg += "[t_He] [t_has] [bicon(r_ear)] \a [r_ear] on [t_his] right ear.\n"
+		msg += "[t_He] носит [bicon(r_ear)] [r_ear] на правом ухе.\n"
 
-	//ID
+	//ID TRANSLATE
 	if(wear_id)
-		msg += "[t_He] [t_is] wearing [bicon(wear_id)] \a [wear_id].\n"
+		msg += "У [t_its] видна [bicon(wear_id)] [wear_id].\n"
 
-	//Jitters
+	//Jitters TRANSLATE
 	if(is_jittery)
 		if(jitteriness >= 300)
-			msg += "<span class='warning'><B>[t_He] [t_is] convulsing violently!</B></span>\n"
+			msg += "<span class='warning'><B>[t_He] сильно дрожит!</B></span>\n"
 		else if(jitteriness >= 200)
-			msg += "<span class='warning'>[t_He] [t_is] extremely jittery.</span>\n"
+			msg += "<span class='warning'>[t_He] нервно подёргиваетс&#255;.</span>\n"
 		else if(jitteriness >= 100)
-			msg += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
+			msg += "<span class='warning'>[t_He] слегка дрожит.</span>\n"
 
-	//splints
+	//splints TRANSLATE
 	for(var/bodypart in list(BP_L_LEG , BP_R_LEG , BP_L_ARM , BP_R_ARM))
 		var/obj/item/organ/external/BP = bodyparts_by_name[bodypart]
 		if(BP && BP.status & ORGAN_SPLINTED)
-			msg += "<span class='warning'>[t_He] [t_has] a splint on [t_his] [BP.name]!</span>\n"
+			msg += "<span class='warning'>У [t_its] шина, установленна&#255; на [BP.name]!</span>\n"
 
 	if(suiciding)
-		msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
+		msg += "<span class='warning'>С виду удачна&#255; попытка суицида... нет никакой надежды на выздоровление.</span>\n"
 
 	if(SMALLSIZE in mutations)
-		msg += "[t_He] [t_is] small halfling!\n"
+		msg += "[t_He] маленького роста!\n"
 
 	var/distance = get_dist(user,src)
 	if(istype(user, /mob/dead/observer) || user.stat == DEAD) // ghosts can see anything
 		distance = 1
 	if (src.stat)
-		msg += "<span class='warning'>[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.</span>\n"
+		msg += "<span class='warning'>[t_He] не реагирует ни на что вокруг себ&#255;, похоже на бесконечный сон...</span>\n"
 		if((stat == DEAD || src.losebreath) && distance <= 3)
-			msg += "<span class='warning'>[t_He] does not appear to be breathing.</span>\n"
+			msg += "<span class='warning'>[t_He] не дышит.</span>\n"
 		if(istype(user, /mob/living/carbon/human) && !user.stat && distance <= 1)
 			for(var/mob/O in viewers(user.loc, null))
-				O.show_message("[user] checks [src]'s pulse.", 1)
+				O.show_message("[user] провер&#255;ет пульс [src]", 1)
 		spawn(15)
 			if(distance <= 1 && user && user.stat != UNCONSCIOUS)
 				if(pulse == PULSE_NONE)
-					to_chat(user, "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>")
+					to_chat(user, "<span class='deadsay'>[t_He] не имеет пульса[src.client ? "" : ", и его душа уже давно покинула его тело."]...</span>")
 				else
-					to_chat(user, "<span class='deadsay'>[t_He] has a pulse!</span>")
+					to_chat(user, "<span class='deadsay'>[t_He] имеет пульс!</span>")
 
 	msg += "<span class='warning'>"
 
 	if(nutrition < 100)
-		msg += "[t_He] [t_is] severely malnourished.\n"
+		msg += "[t_He] имеет проблемы с нарушением питани&#255;.\n"
 	else if(nutrition >= 500)
-		msg += "[t_He] [t_is] quite chubby.\n"
+		msg += "[t_He] имеет серьёзные проблемы с лишним весом.\n"
 
 	msg += "</span>"
 
 	if(stat == UNCONSCIOUS)
-		msg += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.\n"
+		msg += "[t_He] не реагирует ни на что вокруг себ&#255;, похоже на бесконечный сон...\n"
 	else if(getBrainLoss() >= 60)
-		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
+		msg += "[t_He] имеет глупое выражение на лице.\n"
 
 	if(!key && brain_op_stage != 4 && stat != DEAD)
-		msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely</span>\n"
+		msg += "<span class='deadsay'>[t_He] [t_catatonics] в кататонический сон, возможно у [t_its] было слишком много стрессов в жизни...</span>\n"
 	else if(!client && brain_op_stage != 4 && stat != DEAD)
-		msg += "[t_He] [t_has] suddenly fallen asleep.\n"
+		msg += "[t_He] внезапно [t_sleeping]...\n"
 
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()
@@ -258,34 +262,34 @@
 		if(BP)
 			if(BP.status & ORGAN_DESTROYED)
 				is_destroyed["[BP.name]"] = 1
-				wound_flavor_text["[BP.name]"] = "<span class='warning'><b>[t_He] is missing [t_his] [BP.name].</b></span>\n"
+				wound_flavor_text["[BP.name]"] = "<span class='warning'><b>У [t_its] утер&#255;на [BP.name].</b></span>\n"
 				continue
 			if(BP.applied_pressure)
 				if(BP.applied_pressure == src)
-					applying_pressure = "<span class='info'>[t_He] is applying pressure to [t_his] [BP.name].</span><br>"
+					applying_pressure = "<span class='info'>[t_He] оказывает давление на [BP.name].</span><br>"
 				else
-					applying_pressure = "<span class='info'>[BP.applied_pressure] is applying pressure to [t_his] [BP.name].</span><br>"
+					applying_pressure = "<span class='info'>[BP.applied_pressure] оказываемое давление на [BP.name].</span><br>"
 			if(BP.status & ORGAN_ROBOT)
 				if(!(BP.brute_dam + BP.burn_dam))
 					if(!species.flags[IS_SYNTHETIC])
-						wound_flavor_text["[BP.name]"] = "<span class='warning'>[t_He] has a robot [BP.name]!</span>\n"
+						wound_flavor_text["[BP.name]"] = "<span class='warning'>[t_He] имеет кибернетическую [BP.name]!</span>\n"
 						continue
 				else
-					wound_flavor_text["[BP.name]"] = "<span class='warning'>[t_He] has a robot [BP.name], it has"
+					wound_flavor_text["[BP.name]"] = "<span class='warning'>[t_He] имеет кибернетическую [BP.name]"
 				if(BP.brute_dam)
 					switch(BP.brute_dam)
 						if(0 to 20)
-							wound_flavor_text["[BP.name]"] += " some dents"
+							wound_flavor_text["[BP.name]"] += " некоторые повреждени&#255;"
 						if(21 to INFINITY)
-							wound_flavor_text["[BP.name]"] += pick(" a lot of dents"," severe denting")
+							wound_flavor_text["[BP.name]"] += pick(" много повреждений"," т&#255;жёлые повреждени&#255;")
 				if(BP.brute_dam && BP.burn_dam)
-					wound_flavor_text["[BP.name]"] += " and"
+					wound_flavor_text["[BP.name]"] += " и"
 				if(BP.burn_dam)
 					switch(BP.burn_dam)
 						if(0 to 20)
-							wound_flavor_text["[BP.name]"] += " some burns"
+							wound_flavor_text["[BP.name]"] += " некоторые ожоги"
 						if(21 to INFINITY)
-							wound_flavor_text["[BP.name]"] += pick(" a lot of burns"," severe melting")
+							wound_flavor_text["[BP.name]"] += pick(" много ожогов"," т&#255;жёлые ожоги")
 				if(wound_flavor_text["[BP.name]"])
 					wound_flavor_text["[BP.name]"] += "!</span>\n"
 			else if(BP.wounds.len > 0)
@@ -351,7 +355,7 @@
 	if(wound_flavor_text["head"] && (is_destroyed["head"] || (!skipmask && !(wear_mask && istype(wear_mask, /obj/item/clothing/mask/gas)))))
 		msg += wound_flavor_text["head"]
 	else if(is_bleeding["head"])
-		msg += "<span class='warning'>[src] has blood running down [t_his] face!</span>\n"
+		msg += "<span class='warning'>[src] кровь бежит по лицу!</span>\n"
 	if(wound_flavor_text["chest"] && !w_uniform && !skipjumpsuit) //No need.  A missing chest gibs you.
 		msg += wound_flavor_text["chest"]
 	else if(is_bleeding["chest"])
@@ -453,6 +457,8 @@
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a> <a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>\n"
 
+	if(Growth && Weight)
+		msg += "\blue[t_his2] рост : [Growth]\n[t_his2] вес : [Weight]\n [t_his2] телосложение : [body_type]\n"
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
@@ -474,7 +480,7 @@
 				if(V.stealth_active)
 					to_chat(H, "<span class='notice'>You can't focus your eyes on [src].</span>")
 					return
-	to_chat(user, msg)
+	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M, hudtype)

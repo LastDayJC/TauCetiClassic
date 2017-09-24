@@ -193,7 +193,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["job_engsec_low"]		>> job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		>> flavor_text
+	S["flavor_texts_general"]	>> flavor_texts["general"]
+	S["flavor_texts_head"]		>> flavor_texts["head"]
+	S["flavor_texts_face"]		>> flavor_texts["face"]
+	S["flavor_texts_eyes"]		>> flavor_texts["eyes"]
+	S["flavor_texts_torso"]		>> flavor_texts["torso"]
+	S["flavor_texts_arms"]		>> flavor_texts["arms"]
+	S["flavor_texts_hands"]		>> flavor_texts["hands"]
+	S["flavor_texts_legs"]		>> flavor_texts["legs"]
+	S["flavor_texts_feet"]		>> flavor_texts["feet"] //New flavor
+
+	S["Growth"]				>> Growth
+	S["Weight"]				>> Weight
+	S["body_type"]			>> body_type
+
 	S["med_record"]			>> med_record
 	S["sec_record"]			>> sec_record
 	S["gen_record"]			>> gen_record
@@ -251,6 +264,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
 	b_type			= sanitize_text(b_type, initial(b_type))
 	parallax		= sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, PARALLAX_HIGH)
+	Growth			= sanitize_integer(Growth, 150, 210, initial(Growth))
+	Weight			= sanitize_integer(Weight, 50, 170, initial(Weight)) //TEST
 	alternate_option = sanitize_integer(alternate_option, 0, 2, initial(alternate_option))
 	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
 	job_civilian_med = sanitize_integer(job_civilian_med, 0, 65535, initial(job_civilian_med))
@@ -368,7 +383,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["job_engsec_low"]		<< job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		<< flavor_text
+	S["Growth"]				<< Growth
+	S["Weight"]				<< Weight
+	S["body_type"]			<< body_type
+
+	S["flavor_texts_general"]	<< flavor_texts["general"]
+	S["flavor_texts_head"]		<< flavor_texts["head"]
+	S["flavor_texts_face"]		<< flavor_texts["face"]
+	S["flavor_texts_eyes"]		<< flavor_texts["eyes"]
+	S["flavor_texts_torso"]		<< flavor_texts["torso"]
+	S["flavor_texts_arms"]		<< flavor_texts["arms"]
+	S["flavor_texts_hands"]		<< flavor_texts["hands"]
+	S["flavor_texts_legs"]		<< flavor_texts["legs"]
+	S["flavor_texts_feet"]		<< flavor_texts["feet"]
+
 	S["med_record"]			<< med_record
 	S["sec_record"]			<< sec_record
 	S["gen_record"]			<< gen_record

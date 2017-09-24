@@ -8,13 +8,13 @@
 
 	switch(alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<u><a href='?_src_=prefs;preference=job;task=random'><font color=green>Get random job if preferences unavailable</font></a></u>"
+			. += "<u><a href='?_src_=prefs;preference=job;task=random'><font color=green>Получение случайной профессии если не настроено.</font></a></u>"
 		if(BE_ASSISTANT)
 			. += "<u><a href='?_src_=prefs;preference=job;task=random'><font color=red>Be assistant if preference unavailable</font></a></u>"
 		if(RETURN_TO_LOBBY)
 			. += "<u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if preference unavailable</font></a></u>"
 
-	. += "<br><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a>"
+	. += "<br><a href='?_src_=prefs;preference=job;task=reset'>\[Сбросить\]</a>"
 
 	. += "<table width='100%' cellpadding='1' cellspacing='0' style='margin-top:10px'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more colomns.
 	. += "<table width='100%' cellpadding='1' cellspacing='0'>"
@@ -40,18 +40,18 @@
 		var/rank = job.title
 		lastJob = job
 		if(jobban_isbanned(user, rank))
-			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
+			. += "<del>[rank]</del></td><td><b> \[ЗАБАНЕНО]</b></td></tr>"
 			continue
 		if(!job.player_old_enough(user.client))
 			if(config.use_ingame_minutes_restriction_for_jobs)
 				var/available_in_minutes = job.available_in_real_minutes(user.client)
-				. += "<del>[rank]</del></td><td> \[IN [(available_in_minutes)] MINUTES]</td></tr>"
+				. += "<del>[rank]</del></td><td> \[ЧЕРЕЗ [(available_in_minutes)] МИНУТ]</td></tr>"
 			else
 				var/available_in_days = job.available_in_days(user.client)
-				. += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+				. += "<del>[rank]</del></td><td> \[ЧЕРЕЗ [(available_in_days)] ДНЕЙ]</td></tr>"
 			continue
 		if((job_civilian_low & ASSISTANT) && (rank != "Test Subject"))
-			. += "<font color=orange>[rank]</font></td><td></td></tr>"
+			. += "<font color=black>[rank]</font></td><td></td></tr>" //May Be
 			continue
 		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
 			. += "<b>[rank]</b>"
@@ -64,22 +64,22 @@
 
 		if(rank == "Test Subject")//Assistant is special
 			if(job_civilian_low & ASSISTANT)
-				. += " <font color=green size=2>Yes</font>"
+				. += " <font color=green size=2>Да</font>"
 			else
-				. += " <font color=red size=2>No</font>"
+				. += " <font color=red size=2>Нет</font>"
 			. += "</a></td></tr>"
 			if(job.alt_titles)
 				. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			continue
 
 		if(GetJobDepartment(job, 1) & job.flag)
-			. += " <font color=blue size=2>High</font>"
+			. += " <font color=blue size=2>Высокий</font>"
 		else if(GetJobDepartment(job, 2) & job.flag)
-			. += " <font color=green size=2>Medium</font>"
+			. += " <font color=green size=2>Средний</font>"
 		else if(GetJobDepartment(job, 3) & job.flag)
-			. += " <font color=orange size=2>Low</font>"
+			. += " <font color=orange size=2>Низкий</font>"
 		else
-			. += " <font color=red size=2>NEVER</font>"
+			. += " <font color=red size=2>Никогда</font>"
 		if(job.alt_titles)
 			. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 		. += "</a></td></tr>"

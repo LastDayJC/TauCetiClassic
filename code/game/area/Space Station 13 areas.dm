@@ -299,6 +299,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Thunderdome (Observer.)"
 	icon_state = "purple"
 
+//JUNKYARD
+/area/awaymission/junkyard
+	name = "Junkyard"
+	icon_state = "away"
+	always_unpowered = 1
 
 //ENEMY
 

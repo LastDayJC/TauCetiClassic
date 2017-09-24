@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffddff"
+	selection_color = "#ad6bad"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 	access = list(
@@ -47,7 +47,7 @@
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
-	selection_color = "#ffeeff"
+	selection_color = "#633d63"
 	access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
 	minimal_player_ingame_minutes = 1560
@@ -91,7 +91,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the research director"
-	selection_color = "#ffeeff"
+	selection_color = "#633d63"
 	access = list(access_research, access_xenobiology)
 	minimal_player_ingame_minutes = 1560
 
@@ -124,7 +124,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "research director"
-	selection_color = "#ffeeff"
+	selection_color = "#633d63"
 	access = list(access_robotics, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
 	minimal_player_ingame_minutes = 1560

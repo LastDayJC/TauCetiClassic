@@ -71,6 +71,9 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/b_eyes = 0						//Eye color
 	var/species = HUMAN
 	var/language = "None"				//Secondary language
+	var/Growth = 175					//AWWARE UPDATE
+	var/Weight = 75						//AWWARE UPDATE
+	var/body_type = "unknown"			//AWWARE UPDATE BODY_TYPE
 
 	//Some faction information.
 	var/home_system = "None"            //System of birth.
@@ -104,7 +107,9 @@ var/const/MAX_SAVE_SLOTS = 10
 
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
-	var/flavor_text = ""
+	var/list/flavor_texts = list()
+
+	//var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -146,24 +151,24 @@ var/const/MAX_SAVE_SLOTS = 10
 
 	var/dat = "<html><body link='#045EBE' vlink='045EBE' alink='045EBE'><center>"
 	dat += "<style type='text/css'><!--A{text-decoration:none}--></style>"
-	dat += "<style type='text/css'>a.white, a.white:link, a.white:visited, a.white:active{color: #40628a;text-decoration: none;background: #ffffff;border: 1px solid #161616;padding: 1px 4px 1px 4px;margin: 0 2px 0 0;cursor:default;}</style>"
-	dat += "<style>body{background-image:url('dossier_empty.png');background-color: #F5ECDD;background-repeat:no-repeat;background-position:center top;}</style>"
-	dat += "<style>.main_menu{margin-left:150px;margin-top:135px}</style>"
+	dat += "<style type='text/css'>a.white, a.white:link, a.white:visited, a.white:active{color: #40628a;text-decoration: none;background: #cecece;border: 1px solid #161616;padding: 1px 4px 1px 4px;margin: 0 2px 0 0;cursor:default;}</style>"
+	dat += "<style>body{background-image:url('character_classified.png');background-color: #2a2a2a;background-repeat:no-repeat;background-position:center top;}</style>"
+	dat += "<style>.main_menu{margin-left:0px;margin-top:110px}</style>"
 	if(path)
 		dat += "<div class='main_menu'>"
-		dat += "Slot: <b>[real_name]</b> - "
-		dat += "[menu_type=="load_slot"?"<b>Load slot</b>":"<a href=\"byond://?src=\ref[user];preference=load_slot\">Load slot</a>"] - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-		dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a><br>"
-		dat += "[menu_type=="general"?"<b>General</b>":"<a href=\"byond://?src=\ref[user];preference=general\">General</a>"] - "
-		dat += "[menu_type=="occupation"?"<b>Occupation</b>":"<a href=\"byond://?src=\ref[user];preference=occupation\">Occupation</a>"] - "
-		dat += "[menu_type=="roles"?"<b>Roles</b>":"<a href=\"byond://?src=\ref[user];preference=roles\">Roles</a>"] - "
-		dat += "[menu_type=="glob"?"<b>Global</b>":"<a href=\"byond://?src=\ref[user];preference=glob\">Global</a>"] - "
-		dat += "[menu_type=="loadout"?"<b>Loadout</b>":"<a href=\"byond://?src=\ref[user];preference=loadout\">Loadout</a>"]"
-		dat += "<br><a href='?src=\ref[user];preference=close\'><b><font color='#FF4444'>Close</font></b></a>"
+		dat += "Слот: <b>[real_name]</b> - "
+		dat += "[menu_type=="load_slot"?"<b>Загрузить слот</b>":"<a href=\"byond://?src=\ref[user];preference=load_slot\">Загрузить слот</a>"] - "
+		dat += "<a href=\"byond://?src=\ref[user];preference=save\">Сохранить слот</a> - "
+		dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Перезагрузить слот</a><br>"
+		dat += "[menu_type=="general"?"<b>Основные</b>":"<a href=\"byond://?src=\ref[user];preference=general\">Основные</a>"] - "
+		dat += "[menu_type=="occupation"?"<b>Профессия</b>":"<a href=\"byond://?src=\ref[user];preference=occupation\">Профессия</a>"] - "
+		dat += "[menu_type=="roles"?"<b>Роли</b>":"<a href=\"byond://?src=\ref[user];preference=roles\">Роли</a>"] - "
+		dat += "[menu_type=="glob"?"<b>Глобальное</b>":"<a href=\"byond://?src=\ref[user];preference=glob\">Глобальное</a>"] - "
+		dat += "[menu_type=="loadout"?"<b>Загружаемое</b>":"<a href=\"byond://?src=\ref[user];preference=loadout\">Одежда</a>"]"
+		dat += "<br><a href='?src=\ref[user];preference=close\'><b><font color='#3296df'>Закрыть</font></b></a>"
 		dat += "</div>"
 	else
-		dat += "Please create an account to save your preferences."
+		dat += "Создайте аккаунт чтобы сохранить его."
 
 	dat += "</center><hr width='535'>"
 	switch(menu_type)
@@ -259,7 +264,20 @@ var/const/MAX_SAVE_SLOTS = 10
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
-	character.flavor_text = flavor_text
+	character.flavor_texts["general"] = flavor_texts["general"]
+	character.flavor_texts["head"] = flavor_texts["head"]
+	character.flavor_texts["face"] = flavor_texts["face"]
+	character.flavor_texts["eyes"] = flavor_texts["eyes"]
+	character.flavor_texts["torso"] = flavor_texts["torso"]
+	character.flavor_texts["arms"] = flavor_texts["arms"]
+	character.flavor_texts["hands"] = flavor_texts["hands"]
+	character.flavor_texts["legs"] = flavor_texts["legs"]
+	character.flavor_texts["feet"] = flavor_texts["feet"]
+
+	character.Growth = Growth //AWWARE UPDATE
+	character.Weight = Weight //AWWARE UPDATE
+	character.body_type = body_type //AWWARE UPDATE BODY_TYPE
+
 	character.metadata = metadata
 	character.med_record = med_record
 	character.sec_record = sec_record
