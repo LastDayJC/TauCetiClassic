@@ -22,8 +22,25 @@
 	var/list/client_mobs_in_contents
 	var/freeze_movement = FALSE
 
-/atom/movable/New()
-	. = ..()
+/atom/movable/Destroy()
+	//If we have opacity, make sure to tell (potentially) affected light sources.
+	var/turf/T = loc
+	if(opacity && istype(T))
+		opacity = 0
+		T.recalc_atom_opacity()
+		T.reconsider_lights()
+
+	unbuckle_mob()
+
+	if(loc)
+		loc.handle_atom_del(src)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
+	loc = null
+	invisibility = 101
+	if(pulledby)
+		pulledby.stop_pulling()
+	return ..()
 
 /atom/movable/Move(atom/newloc, direct = 0)
 	if(!loc || !newloc || freeze_movement)

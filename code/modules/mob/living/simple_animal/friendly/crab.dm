@@ -57,11 +57,8 @@
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)
-				if(MED.amount >= 1)
+				if(MED.use(1))
 					health = min(maxHealth, health + MED.heal_brute)
-					MED.amount -= 1
-					if(MED.amount <= 0)
-						qdel(MED)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
 							M.show_message("\blue [user] applies the [MED] on [src]")
@@ -78,10 +75,8 @@
 			for(var/mob/M in viewers(src, null))
 				if ((M.client && !( M.blinded )))
 					M.show_message("\red [user] gently taps [src] with the [O]. ")
-
 /mob/living/simple_animal/crab/Topic(href, href_list)
 	if(usr.stat) return
-
 	//Removing from inventory
 	if(href_list["remove_inv"])
 		if(get_dist(src,usr) > 1 || !(ishuman(usr) || ismonkey(usr) || isrobot(usr) ||  isalienadult(usr)))
@@ -109,9 +104,7 @@
 				else
 					to_chat(usr, "\red There is nothing to remove from its [remove_from].")
 					return
-
 		//show_inv(usr) //Commented out because changing Ian's  name and then calling up his inventory opens a new inventory...which is annoying.
-
 	//Adding things to inventory
 	else if(href_list["add_inv"])
 		if(get_dist(src,usr) > 1 || !(ishuman(usr) || ismonkey(usr) || isrobot(usr) ||  isalienadult(usr)))
@@ -129,11 +122,9 @@
 					var/obj/item/item_to_add = usr.get_active_hand()
 					if(!item_to_add)
 						return
-
 					//Corgis are supposed to be simpler, so only a select few objects can actually be put
 					//to be compatible with them. The objects are below.
 					//Many  hats added, Some will probably be removed, just want to see which ones are popular.
-
 					var/list/allowed_types = list(
 						/obj/item/clothing/head/helmet,
 						/obj/item/clothing/glasses/sunglasses,
@@ -163,19 +154,14 @@
 						/obj/item/weapon/bedsheet,
 						/obj/item/clothing/head/soft
 					)
-
 					if( ! ( item_to_add.type in allowed_types ) )
 						to_chat(usr, "\red It doesn't seem too keen on wearing that item.")
 						return
-
 					usr.drop_item()
 					item_to_add.loc = src
 					src.inventory_head = item_to_add
 					regenerate_icons()
-
 					//Various hats and items (worn on his head) change Ian's behaviour. His attributes are reset when a HAT is removed.
-
-
 					switch(inventory_head && inventory_head.type)
 						if(/obj/item/clothing/head/caphat, /obj/item/clothing/head/collectable/captain)
 							name = "Captain [real_name]"
@@ -225,7 +211,6 @@
 							name = "Corgi Tech [real_name]"
 							speak = list("Needs a stamp!", "Request DENIED!", "Fill these out in triplicate!")
 							desc = "The reason your yellow gloves have chew-marks."
-
 			if("mask")
 				if(inventory_mask)
 					to_chat(usr, "\red It's already wearing something.")
@@ -234,28 +219,22 @@
 					var/obj/item/item_to_add = usr.get_active_hand()
 					if(!item_to_add)
 						return
-
 					//Corgis are supposed to be simpler, so only a select few objects can actually be put
 					//to be compatible with them. The objects are below.
-
 					var/list/allowed_types = list(
 						/obj/item/clothing/suit/armor/vest,
 						/obj/item/device/radio
 					)
-
 					if( ! ( item_to_add.type in allowed_types ) )
 						to_chat(usr, "\red This object won't fit.")
 						return
-
 					usr.drop_item()
 					item_to_add.loc = src
 					src.inventory_mask = item_to_add
 					regenerate_icons()
-
 		//show_inv(usr) //Commented out because changing Ian's  name and then calling up his inventory opens a new inventory...which is annoying.
 	else
 		..()
-
 /mob/living/simple_animal/crab/GetMad()
 	name = "MEGAMADCRAB"
 	real_name = "MEGAMADCRAB"

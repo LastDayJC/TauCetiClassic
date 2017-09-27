@@ -4,6 +4,10 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
+
+	var/open_sound = 'sound/effects/locker_open.ogg'
+	var/close_sound = 'sound/effects/locker_close.ogg' //UPDATE AWWARE
+
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -16,10 +20,12 @@
 	var/storage_capacity = 30 //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
 
-/obj/structure/closet/initialize()
+/obj/structure/closet/atom_init()
+	. = ..()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		for(var/obj/item/I in src.loc)
-			if(I.density || I.anchored || I == src) continue
+			if(I.density || I.anchored || I == src)
+				continue
 			I.forceMove(src)
 
 /obj/structure/closet/alter_health()
@@ -66,7 +72,7 @@
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
-		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
+		playsound(src.loc, open_sound, 15, 1, -3) //AWWARE UPDATE
 	density = 0
 	return 1
 
@@ -109,7 +115,7 @@
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
 	else
-		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
+		playsound(src.loc, close_sound, 25, 0, -3) //AWWARE UPDATE
 	density = 1
 	return 1
 
@@ -183,7 +189,7 @@
 			if(!WT.remove_fuel(0,user))
 				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 				return
-			new /obj/item/stack/sheet/metal(src.loc)
+			new /obj/item/stack/sheet/metal(loc)
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
 			qdel(src)

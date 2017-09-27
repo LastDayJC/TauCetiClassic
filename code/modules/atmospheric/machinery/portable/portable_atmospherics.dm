@@ -59,8 +59,8 @@
 	connected_port = new_port
 	connected_port.connected_device = src
 	var/datum/pipeline/connected_port_parent = connected_port.PARENT1
-	connected_port_parent.reconcile_air()
-
+	if(connected_port_parent)
+		connected_port_parent.reconcile_air()
 	anchored = TRUE // Prevent movement
 	return TRUE
 

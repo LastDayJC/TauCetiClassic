@@ -24,10 +24,13 @@
  */
 #define QDEL_NULL(item) if(item) { qdel(item); item = null }
 
-/**
- * Return `TRUE` if `X` already passed `Destroy()` phase.
- */
-#define QDELETED(X) (!X || X.gc_destroyed)
+//Return `TRUE` if `X` already passed `Destroy()` phase.
+#define QDELING(X) (X.gc_destroyed)
+
+/*
+* Same as above plus...
+*/
+#define QDELETED(X) (!X || QDELING(X))
 
 /**
  * Return `TRUE` if `X` is in `Destroy()` phase.

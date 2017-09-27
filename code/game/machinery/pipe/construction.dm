@@ -541,9 +541,7 @@ Buildable meters
 			if (pipename)
 				V.name = pipename
 
-			V.initialize() // this must be removed, once atom initialization port occurs.
 			V.construction()
-
 
 		if(PIPE_MVALVE)		//manual valve
 			var/obj/machinery/atmospherics/components/binary/valve/V = new(loc)
@@ -644,7 +642,6 @@ Buildable meters
 			if (pipename)
 				S.name = pipename
 
-			S.initialize() // this must be removed, once atom initialization port occurs.
 			S.construction()
 
 		if(PIPE_MTVALVE)		//manual t-valve

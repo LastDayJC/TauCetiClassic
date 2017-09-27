@@ -87,6 +87,7 @@
 	var/robolimb_count = 0 // Number of robot limbs.
 
 	//MISC
+	var/datum/personal_crafting/handcrafting
 	var/list/flavor_texts = list()
 
 	var/Growth = 175				//AWWARE UPDATE

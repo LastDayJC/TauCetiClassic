@@ -31,7 +31,9 @@
 #define PHORONGUARD             4096    // Does not get contaminated by phoron.
 #define DROPDEL                 8192    // When dropped, it calls qdel on itself
 
-#define	NOREACT  4096    //Reagents dont' react inside this container.
+#define	NOREACT  4096    	//Reagents dont' react inside this container.
+
+#define HOLOGRAM_2   1 		/* Secondary atom flags, for the flags_2 var, denoted with a _2 */
 
 //Species flags.
 #define NO_BLOOD           "no_blood"
