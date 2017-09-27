@@ -1,6 +1,6 @@
 #define VOX_SHUTTLE_MOVE_TIME 375
 #define VOX_SHUTTLE_COOLDOWN 1200
-#define VOX_CAN_USE(A) (ishuman(A) && A.can_speak(all_languages["Vox-pidgin"]) || isobserver(A)) 
+#define VOX_CAN_USE(A) (ishuman(A) && A.can_speak(all_languages["Vox-pidgin"]) || isobserver(A))
 // human and know vox language (and ghosts, because ghosts see everything).
 
 //Copied from Syndicate shuttle.
@@ -69,7 +69,7 @@ var/global/announce_vox_departure = FALSE // Stealth systems - give an announcem
 		if(curr_location == locate(/area/shuttle/vox/station))
 			command_alert("Внимание, КСН \"Исход\", неподалёку от вашей станции проходит корабль не отвечающий на наши запросы. По последним данным этот корабль принадлежит Торговой Конфедерации.")
 		else if(returning)
-			command_alert("Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of Tau Ceti at a rapid clip.", "NSV Icarus")
+			command_alert("Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of Phoenix at a rapid clip.", "NSV Icarus")
 
 	moving = TRUE
 	lastMove = world.time

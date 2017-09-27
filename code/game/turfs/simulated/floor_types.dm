@@ -241,23 +241,23 @@
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
-/turf/simulated/floor/plating/ironsand
+/turf/simulated/floor/plating/airless/ironsand
 	name = "Iron Sand"
 	icon_state = "ironsand1"
-	basetype = /turf/simulated/floor/plating/ironsand
+	basetype = /turf/simulated/floor/plating/airless/ironsand
 
-/turf/simulated/floor/plating/ironsand/ex_act()
+/turf/simulated/floor/plating/airless/ironsand/ex_act()
 	return 0
 
-/turf/simulated/floor/plating/ironsand/burn_tile()
+/turf/simulated/floor/plating/airless/ironsand/burn_tile()
 	return 0
 
-/turf/simulated/floor/plating/ironsand/New()
+/turf/simulated/floor/plating/airless/ironsand/New()
 	..()
 	icon_state = "ironsand[rand(1,15)]"
 
 /turf/simulated/floor/plating/snow
-	basetype = /turf/simulated/floor/plating/ironsand
+	basetype = /turf/simulated/floor/plating/airless/ironsand
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"

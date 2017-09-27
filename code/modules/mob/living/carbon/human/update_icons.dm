@@ -365,8 +365,26 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays_standing[BODY_LAYER] = standing
 	apply_overlay(BODY_LAYER)
 
-
-
+/*
+	if(has_breasts && underwear >)
+		var/choice_breasts = null
+		switch(breasts_shape)
+			if("Breats Pair A") //"Breats Pair A", "Breats Pair B", "Breats Pair C", "Breats Pair D", "Breats Pair E"
+				choice_breasts = "breasts_pair_a_0_FRONT"
+			if("Breats Pair B")
+				choice_breasts = "breasts_pair_b_0_FRONT"
+			if("Breats Pair C")
+				choice_breasts = "breasts_pair_c_0_FRONT"
+			if("Breats Pair D")
+				choice_breasts = "breasts_pair_d_0_FRONT"
+			if("Breats Pair E")
+				choice_breasts = "breasts_pair_e_0_FRONT"
+			if("Pair")
+				choice_breasts = "breasts_pair_d_0_FRONT"
+		var/image/img_breasts = image("icon"='code/phoenix_code/breats.dmi', "icon_state"=choice_breasts, "layer"=-BODY_LAYER)
+		img_breasts.color = RGB_CONTRAST(s_tone, s_tone, s_tone)
+		standing	+= img_breasts
+*/
 //HAIR OVERLAY
 /mob/living/carbon/human/proc/update_hair()
 	//Reset our hair

@@ -31,7 +31,7 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/ignore_cid_warning = 0
 
 	//game-preferences
-	var/UI_style = "White"
+	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 	var/ooccolor = "#b82e00"
@@ -74,6 +74,10 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/Growth = 175					//AWWARE UPDATE
 	var/Weight = 75						//AWWARE UPDATE
 	var/body_type = "unknown"			//AWWARE UPDATE BODY_TYPE
+	var/has_breasts = FALSE				//BREASTS FEMALE
+	var/breasts_size = "C"				//DEFAULT VAR => null
+	var/breasts_shape = "Pair"
+	var/breasts_fluid = "milk"
 
 	//Some faction information.
 	var/home_system = "None"            //System of birth.

@@ -92,7 +92,7 @@ Admin:
 	to_chat(src, other)
 	if(holder)
 		to_chat(src, admin)
-
+/*
 /client/verb/changes()
 	set name = "Changelog"
 	set desc = "View the changelog."
@@ -125,3 +125,4 @@ Admin:
 		prefs.lastchangelog = changelog_hash
 		prefs.save_preferences()
 		winset(src, "rpane.changelog", "font-style=;background-color=#FFF;")
+*/

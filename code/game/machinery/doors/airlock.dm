@@ -50,8 +50,8 @@ var/list/airlock_overlays = list()
 	var/image/old_weld_overlay
 	var/image/old_sparks_overlay
 
-	door_open_sound          = 'sound/machines/airlock/airlockToggle.ogg'
-	door_close_sound         = 'sound/machines/airlock/airlockToggle.ogg'
+	door_open_sound  = 		   'sound/machines/newairlock_open.ogg'
+	door_close_sound = 		   'sound/machines/newairlock_close.ogg'
 	var/door_deni_sound      = 'sound/machines/airlock/airlockDenied.ogg'
 	var/door_bolt_up_sound   = 'sound/machines/airlock/airlockBoltsUp.ogg'
 	var/door_bolt_down_sound = 'sound/machines/airlock/airlockBoltsDown.ogg'

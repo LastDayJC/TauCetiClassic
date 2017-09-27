@@ -11,7 +11,7 @@
 	throwforce = 0
 	w_class = 1.0
 	throw_range = 1
-	throw_speed = 1
+	throw_speed = 2
 	layer = 3.9
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
@@ -106,6 +106,7 @@
 		crumpled = 1
 		icon_state = "crumpled"
 		throw_range = 5
+		throw_speed = 2
 		overlays = null
 	else
 		crumpled = 2

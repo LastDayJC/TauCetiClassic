@@ -62,6 +62,9 @@
 	var/flesh_color = "#FFC896" //Pink.
 	var/base_color      //Used when setting species.
 
+	var/genitals = 0						  //For erp _ AWWARE UPDATE
+	var/anus = 0							  //Also for erp AWWARE UPDATE
+
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template

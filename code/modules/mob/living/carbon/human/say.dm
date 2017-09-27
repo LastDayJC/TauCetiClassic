@@ -1,5 +1,5 @@
 /mob/living/carbon/human/say(message)
-	var/verb = "says"
+	var/verb = "говорит"
 	var/alt_name = ""
 	var/message_range = world.view
 	var/italics = 0
@@ -81,9 +81,9 @@
 		verb = speaking.get_spoken_verb(ending)
 	else
 		if(ending=="!")
-			verb=pick("exclaims","shouts","yells")
-		if(ending=="?")
-			verb="asks"
+			verb="восклицает"
+		else if(ending=="?")
+			verb="спрашивает"
 
 	if(speech_problem_flag)
 		var/list/handle_r = handle_speech_problems(message, message_mode)

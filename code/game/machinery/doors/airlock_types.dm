@@ -246,6 +246,9 @@
 	icon          = 'icons/obj/doors/airlocks/external/external.dmi'
 	overlays_file = 'icons/obj/doors/airlocks/external/overlays.dmi'
 
+	door_open_sound = 'sound/machines/airlock_ext_open.ogg'
+	door_close_sound = 'sound/machines/airlock_ext_close.ogg'
+
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 
 

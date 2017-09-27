@@ -40,12 +40,12 @@
 
 
 
-/turf/simulated/mineral/airfull
-	basetype = /turf/simulated/floor/plating/ironsand
+/turf/simulated/mineral/airless/junkyard
+	basetype = /turf/simulated/floor/plating/airless/ironsand
 	name = "Mineral deposit"
 	icon_state = "rock"
 
-/turf/simulated/mineral/airfull/junkyard/New()
+/turf/simulated/mineral/airless/junkyard/New()
 	..()
 
 
@@ -57,9 +57,7 @@
 			new /obj/random/scrap/dense_weighted(A)
 
 
-/turf/simulated/floor/plating/ironsand/junkyard/surround_by_scrap()
-	if(prob(1))
-		new /obj/item/blueprints/junkyard(src)
+/turf/simulated/floor/plating/airless/ironsand/junkyard/surround_by_scrap()
 	if(prob(2))
 		new /obj/structure/scrap/poor/structure(src)
 	if(prob(4))
@@ -74,17 +72,17 @@
 
 	return 1
 
-/turf/simulated/floor/plating/ironsand/update_air_properties()
+/turf/simulated/floor/plating/airless/ironsand/update_air_properties()
 	return // Critical fix :joypain:
 
-/turf/simulated/floor/plating/ironsand/junkyard/safe
+/turf/simulated/floor/plating/airless/ironsand/junkyard/safe
 	icon_state = "ironsand2"
-/turf/simulated/floor/plating/ironsand/junkyard/challenging
+/turf/simulated/floor/plating/airless/ironsand/junkyard/challenging
 	icon_state = "ironsand3"
-/turf/simulated/floor/plating/ironsand/junkyard/dangerous
+/turf/simulated/floor/plating/airless/ironsand/junkyard/dangerous
 	icon_state = "ironsand4"
 
-/turf/simulated/floor/plating/ironsand/junkyard/safe/surround_by_scrap()
+/turf/simulated/floor/plating/airless/ironsand/junkyard/safe/surround_by_scrap()
 	if(..())
 		if(prob(1))
 			new /obj/effect/scrap_pile_generator(src, heap_size = 1)
@@ -94,12 +92,12 @@
 			return
 
 
-/turf/simulated/floor/plating/ironsand/junkyard/challenging/surround_by_scrap()
+/turf/simulated/floor/plating/airless/ironsand/junkyard/challenging/surround_by_scrap()
 	if(..())
 		if(prob(1))
 			new /obj/effect/scrap_pile_generator(src, heap_size = 2)
 			return
-/turf/simulated/floor/plating/ironsand/junkyard/dangerous/surround_by_scrap()
+/turf/simulated/floor/plating/airless/ironsand/junkyard/dangerous/surround_by_scrap()
 	if(..())
 		if(prob(1))
 			new /obj/effect/scrap_pile_generator(src, "heap_size" = 3)

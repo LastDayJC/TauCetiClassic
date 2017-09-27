@@ -43,7 +43,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Arrival Shuttle"
 
 /area/shuttle/arrival/pre_game
-	name = "Tau Ceti Transfer Station 13"
+	name = "Phoenix Transfer Station 13"
 	icon_state = "shuttle2"
 
 /area/shuttle/arrival/transit
@@ -304,6 +304,20 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Junkyard"
 	icon_state = "away"
 	always_unpowered = 1
+
+/area/awaymission/junkBase
+	name = "Junkyard Base"
+	icon_state = "away2"
+
+/area/shuttle/junkyard_shuttle
+	name = "Junkyard Shuttle"
+	music = "music/escape.ogg"
+
+/area/shuttle/junkyard_shuttle/station
+	icon_state = "shuttle2"
+
+/area/shuttle/junkyard_shuttle/outpost
+	icon_state = "shuttle"
 
 //ENEMY
 

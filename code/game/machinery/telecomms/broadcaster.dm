@@ -429,7 +429,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(M)
 			quotedmsg = M.say_quote(message)
 		else
-			quotedmsg = "says, \"[message]\""
+			quotedmsg = "говорит, \"[message]\""
 
 		// --- This following recording is intended for research and feedback in the use of department radio channels ---
 

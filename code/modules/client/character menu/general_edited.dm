@@ -179,7 +179,14 @@
 	. += 						"<br><br>"
 
 	. += 						"<b>Описание внешности:</b><br>"
-	. += 						" <a href='byond://?src=\ref[user];preference=flavor_text;task=input;flavor_text=open'>...</a>"
+	. += 						" <a href='byond://?src=\ref[user];preference=flavor_text;task=input;flavor_text=open'>...</a><br>"
+	//. +=						"<b>Грудь:</b><br>"
+	//. +=						" <a href= 'byond://?src=\ref[user];preference=has_breats;task=input'>[has_breasts == TRUE ? "Yes" : "No"]</a><br>"
+	//if(has_breasts)
+	//	.	+= "<b>Cup Size:</b><br>"
+	//	.	+= " <a href='byond://?src=\ref[user];preference=breats_size;task=input'>[breasts_size]</a><br>"
+	//	.	+= "<b>Breats Shape:</b><br>"
+	//	.	+= " <a href='byond;://?src=\ref[user];preference=breasts_shape;task=input'>[breasts_shape]</a>"
 	. += 					"</td>"
 	. += 				"</tr>"
 	. += 			"</table>"	//Backstory table end
@@ -275,6 +282,25 @@
 								Growth = max(min( round(new_growth), 210),155)
 							if(FEMALE)
 								Growth = max(min( round(new_growth), 200),155)
+				if("has_breats")
+					switch(has_breasts)
+						if(TRUE)
+							has_breasts = FALSE
+						if(FALSE)
+							has_breasts = TRUE
+						else
+							has_breasts = FALSE
+				if("breasts_size")
+					var/new_size
+					new_size = input(user, "Breast Size", "Character Preference") as null|anything in list("A", "B", "C", "D", "E")
+					if(new_size)
+						breasts_size = new_size
+
+				if("breasts_shape")
+					var/new_shape
+					new_shape = input(user, "Breast Shape", "Character Preference") as null|anything in breats_shape
+					if(new_shape)
+						breasts_shape = new_shape
 				if("weight")
 					var/new_weight = input(user, "Write your weight.", "Character Preference")  as num|null
 					if(new_weight)

@@ -1205,7 +1205,7 @@
 	force = 0
 	throwforce = 1
 	w_class = 1.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 3
 	plant_type = 1
 	seed = "/obj/item/seeds/sunflower"
@@ -1219,7 +1219,7 @@
 	force = 0
 	throwforce = 1
 	w_class = 2.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 3
 	plant_type = 1
 	seed = "/obj/item/seeds/gibtomato"
@@ -1242,7 +1242,7 @@
 	force = 15
 	throwforce = 1
 	w_class = 2.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 3
 	plant_type = 1
 	origin_tech = "combat=1"
@@ -1264,7 +1264,7 @@
 	force = 30
 	throwforce = 1
 	w_class = 2.0
-	throw_speed = 1
+	throw_speed = 2
 	throw_range = 3
 	plant_type = 1
 	seed = "/obj/item/seeds/deathnettleseed"

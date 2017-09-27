@@ -28,7 +28,7 @@
 	trigger = rand(0,MAX_TRIGGER)
 
 	//this will be replaced by the excavation code later, but it's here just in case
-	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","phoenix","alpha")]-[rand(100,999)]"
 
 	//random charge time and distance
 	switch(pick(100;1, 50;2, 25;3))
