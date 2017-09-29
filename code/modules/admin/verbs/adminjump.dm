@@ -159,3 +159,39 @@
 			feedback_add_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		else
 			alert("Admin jumping disabled")
+
+/client/proc/Freeze_Ckey()
+	set category = "Admin"
+	set name = "Freeze ckey"
+
+	if(!src.holder)
+		to_chat(src, "Only administrators may use this command.")
+		return
+
+	var/list/keys = list()
+	for(var/mob/M in player_list)
+		keys += M.client
+	var/selection = input("Please, select a player!", "Admin freezing", null, null) as null|anything in sortKey(keys)
+	if(!selection)
+		to_chat(src, "No keys found.")
+		return
+	var/mob/M = selection:mob
+	var/image/I = image('icons/effects/effects.dmi', "freeze")
+	if(src.mob)
+		if(M.freeze_movement)
+			M.freeze_movement = FALSE
+			M.SetParalysis(0)
+			M.SetWeakened(0)
+			M.overlays -= I
+			to_chat(M, "\red <b>YOU UNFREEZED!</b>")
+			log_admin("[key_name(usr)] unfreeze => [key_name(M)]")
+			message_admins("[key_name_admin(usr)] unfreeze => [key_name_admin(M)]")
+		else
+			M.overlays += I
+			M.freeze_movement = TRUE
+			M.SetParalysis(INFINITY)
+			M.SetWeakened(INFINITY)
+			to_chat(M, "\red <b>YOU FREEZED!</b>")
+			log_admin("[key_name(usr)] freeze => [key_name(M)]")
+			message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
+		feedback_add_details("admin_verb","FCY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -56,8 +56,8 @@
 
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
-/mob/living/simple_animal/New()
-	..()
+/mob/living/simple_animal/atom_init()
+	. = ..()
 	verbs -= /mob/verb/observe
 
 /mob/living/simple_animal/Login()
