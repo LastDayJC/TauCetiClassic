@@ -16,6 +16,9 @@
 	var/release_pressure = ONE_ATMOSPHERE
 	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP // in L/s
 
+	var/can_max_release_pressure = (ONE_ATMOSPHERE * 10)
+	var/can_min_release_pressure = (ONE_ATMOSPHERE / 10)
+
 	var/health = 100
 	var/temperature_resistance = 1000 + T0C
 	var/starter_temp
@@ -348,8 +351,8 @@ update_flag
 	data["portConnected"] = connected_port ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
-	data["minReleasePressure"] = round(ONE_ATMOSPHERE / 10)
-	data["maxReleasePressure"] = round(10 * ONE_ATMOSPHERE)
+	data["minReleasePressure"] = round(can_min_release_pressure)
+	data["maxReleasePressure"] = round(can_max_release_pressure)
 	data["valveOpen"] = valve_open ? 1 : 0
 
 	data["hasHoldingTank"] = holding ? 1 : 0
@@ -427,7 +430,7 @@ update_flag
 
 	if (href_list["pressure_adj"])
 		var/diff = text2num(href_list["pressure_adj"])
-		release_pressure = Clamp(release_pressure + diff, 10 * ONE_ATMOSPHERE, ONE_ATMOSPHERE / 10)
+		release_pressure = Clamp(release_pressure + diff, can_min_release_pressure, can_max_release_pressure)
 		investigate_log("was set to [release_pressure] kPa by [key_name(usr)].", INVESTIGATE_ATMOS)
 
 	if (href_list["relabel"])

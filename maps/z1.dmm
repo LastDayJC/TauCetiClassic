@@ -6805,7 +6805,7 @@
 "cAS" = (/obj/machinery/computer/telecomms/server{network = list("tcommsat")},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet,/area/tcommsat/computer)
 "cAT" = (/obj/structure/stool/bed/chair/office/dark{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 6},/turf/simulated/floor/carpet,/area/tcommsat/computer)
 "cAU" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 4},/turf/simulated/floor/carpet,/area/tcommsat/computer)
-"cAV" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{dir = 4},/turf/simulated/floor/carpet,/area/tcommsat/computer)
+"cAV" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{dir = 8},/turf/simulated/floor/carpet,/area/tcommsat/computer)
 "cAW" = (/obj/machinery/computer/telecomms/server{network = list("tcommsat")},/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/carpet,/area/tcommsat/computer)
 "cAX" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/turf/simulated/floor{icon_state = "dark"},/area/aisat)
 "cAY" = (/obj/machinery/atmospherics/components/unary/thermomachine/freezer{dir = 1; icon_state = "freezer_1"; power_setting = 20; set_temperature = 73; use_power = 1},/turf/simulated/floor/carpet,/area/tcommsat/computer)
