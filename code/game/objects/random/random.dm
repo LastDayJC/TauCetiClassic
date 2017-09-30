@@ -7,8 +7,8 @@
 
 
 // creates a new object and deletes itself
-/obj/random/New()
-	..()
+/obj/random/atom_init()
+	. = ..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
 	qdel(src)

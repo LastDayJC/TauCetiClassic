@@ -113,12 +113,12 @@
 */
 
 /mob/proc/say_quote(message, datum/language/speaking = null)
-        var/verb = "says"
+        var/verb = "говорит"
         var/ending = copytext(message, length(message))
         if(ending=="!")
-                verb=pick("exclaims","shouts","yells")
+                verb="восклицает"
         else if(ending=="?")
-                verb="asks"
+                verb="спрашивает"
 
         return verb
 

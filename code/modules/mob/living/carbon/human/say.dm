@@ -69,7 +69,7 @@
 				for(var/mob/M in dead_mob_list)
 					to_chat(M, text("<span class='abductor_team[]'><b>[user.real_name]:</b> [sm]</span>", user.team))
 					if(!isobserver(M) && (M.stat != DEAD))
-						to_chat(M, "<hr><span class='warning'>Если вы видите это сообщение, значит что-то сломалось. Пожалуйста, свЯжитесь со мной <b>SpaiR</b> на форуме (http://tauceti.ru/forums/index.php?action=profile;u=1929) или попросите кого-нибудь менЯ позвать. Пожалуйста, <u>запомните</u> что произошло в раунде, эта информациЯ очень <b>важна</b>. Чтобы сообщение исчезло попросите админа достать вас из тела и поместить обратно или сами уйдите в обсерверы.</span><hr>")
+						to_chat(M, "<hr><span class='warning'>Если вы видите это сообщение, значит что-то сломалось свяжитесь с администрацией сервера.</span><hr>")
 				log_say("Abductor: [name]/[key] : [sm]")
 				return ""
 
