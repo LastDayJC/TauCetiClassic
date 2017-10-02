@@ -1716,7 +1716,6 @@
 #include "code\modules\scrap\scrap_refinery.dm"
 #include "code\modules\scrap\scrap_stacker.dm"
 #include "code\modules\scrap\scrap_tools.dm"
-#include "code\modules\scrap\scrap_tornado.dm"
 #include "code\modules\scrap\scrap_turfs.dm"
 #include "code\modules\scripting\Errors.dm"
 #include "code\modules\scripting\IDE.dm"

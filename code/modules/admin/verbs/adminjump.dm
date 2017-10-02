@@ -195,3 +195,32 @@
 			log_admin("[key_name(usr)] freeze => [key_name(M)]")
 			message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
 		feedback_add_details("admin_verb","FCY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/Freeze_Mob(mob/M in mob_list)
+	set category = "Admin"
+	set name = "Freeze Mob"
+
+	if (!holder)
+		to_chat(src, "Only administrators may use this command.")
+		return
+
+	var/image/I = image('icons/effects/effects.dmi', "freeze")
+	if(src.mob)
+		var/mob/A = src.mob
+		if(A.freeze_movement)
+			A.freeze_movement = FALSE
+			A.SetParalysis(0)
+			A.SetWeakened(0)
+			A.overlays -= I
+			to_chat(A, "\red <b>YOU UNFREEZED!</b>")
+			log_admin("[key_name(usr)] unfreeze => [key_name(M)]")
+			message_admins("[key_name_admin(usr)] unfreeze => [key_name_admin(M)]")
+		else
+			A.overlays += I
+			A.freeze_movement = TRUE
+			A.SetParalysis(INFINITY)
+			A.SetWeakened(INFINITY)
+			to_chat(M, "\red <b>YOU FREEZED!</b>")
+			log_admin("[key_name(usr)] freeze => [key_name(M)]")
+			message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
+		feedback_add_details("admin_verb","FCYM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

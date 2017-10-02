@@ -102,21 +102,6 @@
 		return is_scrap_immune(L.loc)
 	return FALSE //RIP you
 
-/datum/weather/scrap_storm/start()
-	..()
-	if(spawn_tornadoes)
-		var/list/turfs = get_area_turfs(area_type)
-		for(var/i = 1 to 4)
-			var/turf/wheretospawn = pick(turfs)
-			if(!wheretospawn.density)
-				var/obj/singularity/scrap_ball/new_tornado = new /obj/singularity/scrap_ball(wheretospawn)
-				tornados += new_tornado
-
-/datum/weather/scrap_storm/end()
-	for(var/obj/singularity/scrap_ball/del_tornado in tornados)
-		qdel(del_tornado)
-	..()
-
 /datum/weather/scrap_storm/impact(mob/living/L)
 	if(is_scrap_immune(L))
 		return
