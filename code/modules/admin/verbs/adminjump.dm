@@ -205,21 +205,20 @@
 		return
 
 	var/image/I = image('icons/effects/effects.dmi', "freeze")
-	if(M.mob)
-		if(M.freeze_movement)
-			M.freeze_movement = FALSE
-			M.SetParalysis(0)
-			M.SetWeakened(0)
-			M.overlays -= I
-			to_chat(M, "\red <b>YOU UNFREEZED!</b>")
-			log_admin("[key_name(usr)] unfreeze => [key_name(M)]")
-			message_admins("[key_name_admin(usr)] unfreeze => [key_name_admin(M)]")
-		else
-			M.overlays += I
-			M.freeze_movement = TRUE
-			M.SetParalysis(INFINITY)
-			M.SetWeakened(INFINITY)
-			to_chat(M, "\red <b>YOU FREEZED!</b>")
-			log_admin("[key_name(usr)] freeze => [key_name(M)]")
-			message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
-		feedback_add_details("admin_verb","FCYM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	if(M.freeze_movement)
+		M.freeze_movement = FALSE
+		M.SetParalysis(0)
+		M.SetWeakened(0)
+		M.overlays -= I
+		to_chat(M, "\red <b>YOU UNFREEZED!</b>")
+		log_admin("[key_name(usr)] unfreeze => [key_name(M)]")
+		message_admins("[key_name_admin(usr)] unfreeze => [key_name_admin(M)]")
+	else
+		M.overlays += I
+		M.freeze_movement = TRUE
+		M.SetParalysis(INFINITY)
+		M.SetWeakened(INFINITY)
+		to_chat(M, "\red <b>YOU FREEZED!</b>")
+		log_admin("[key_name(usr)] freeze => [key_name(M)]")
+		message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
+	feedback_add_details("admin_verb","FCYM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
