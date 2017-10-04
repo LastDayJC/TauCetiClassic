@@ -205,21 +205,20 @@
 		return
 
 	var/image/I = image('icons/effects/effects.dmi', "freeze")
-	if(src.mob)
-		var/mob/A = src.mob
-		if(A.freeze_movement)
-			A.freeze_movement = FALSE
-			A.SetParalysis(0)
-			A.SetWeakened(0)
-			A.overlays -= I
-			to_chat(A, "\red <b>YOU UNFREEZED!</b>")
+	if(M.mob)
+		if(M.freeze_movement)
+			M.freeze_movement = FALSE
+			M.SetParalysis(0)
+			M.SetWeakened(0)
+			M.overlays -= I
+			to_chat(M, "\red <b>YOU UNFREEZED!</b>")
 			log_admin("[key_name(usr)] unfreeze => [key_name(M)]")
 			message_admins("[key_name_admin(usr)] unfreeze => [key_name_admin(M)]")
 		else
-			A.overlays += I
-			A.freeze_movement = TRUE
-			A.SetParalysis(INFINITY)
-			A.SetWeakened(INFINITY)
+			M.overlays += I
+			M.freeze_movement = TRUE
+			M.SetParalysis(INFINITY)
+			M.SetWeakened(INFINITY)
 			to_chat(M, "\red <b>YOU FREEZED!</b>")
 			log_admin("[key_name(usr)] freeze => [key_name(M)]")
 			message_admins("[key_name_admin(usr)] freeze => [key_name_admin(M)]")
